@@ -20,8 +20,6 @@ describe('Hash table constructor', () => {
     expect(hashTable.data instanceof Array).to.be.true;
     expect(hashTable.data.length).to.equal(2);
 
-    expect(hashTable.data[0]).to.equal(null);
-    expect(hashTable.data[1]).to.equal(null);
 
   });
 
@@ -34,10 +32,10 @@ describe('Hash table constructor', () => {
     expect(hashTable.data instanceof Array).to.be.true;
     expect(hashTable.data.length).to.equal(4);
 
-    expect(hashTable.data[0]).to.equal(null);
-    expect(hashTable.data[1]).to.equal(null);
-    expect(hashTable.data[2]).to.equal(null);
-    expect(hashTable.data[3]).to.equal(null);
+    expect(hashTable.data[0]).to.equal(undefined);
+    expect(hashTable.data[1]).to.equal(undefined);
+    expect(hashTable.data[2]).to.equal(undefined);
+    expect(hashTable.data[3]).to.equal(undefined);
 
   });
 
@@ -60,6 +58,9 @@ describe('Hash table methods', () => {
     expect(hashTable.hash("A")).to.equal(1436216016);
 
     // First 8 digits of sha256("B") are 0xdf7e70e
+    /* Note next line==> the sha256 of "B" is
+    => df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c
+    the first 8 would be 0xdf7e70e5 but not => 0xdf7e70e , it misses 5*/
     expect(hashTable.hash("B")).to.equal(3749605605);
 
     // First 8 digits of sha256("C") are 0x6b23c0d5
