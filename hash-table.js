@@ -97,10 +97,44 @@ class HashTable {
   }
 
   insert(key, value) {
+    console.log(this.hashMod(key))
     // Your code here
+    //to check of it needs update or change
+    let Updated = false;
+    //to create new node;
+    let newKeyPair = new KeyValuePair(key, value)
+    if (this.data[this.hashMod(key)]) {
+      let current = this.data[this.hashMod(key)];
+      while (current) {
+        if (current.key === key) {
+          //update the current values to new value
+          current.value = value;
+          Updated = true;
+        }
+        //else continue
+        current = current.next;
+      }
+      //if not updated, insert new item;
+      if (Updated === false) {
+        newKeyPair.next = this.data[this.hashMod(key)];
+        this.data[this.hashMod(key)] = newKeyPair;
+        this.count++;
+      }
+
+    } else {
+      this.data[this.hashMod(key)] = newKeyPair;
+      this.count++;
+    }
+    return this;
   }
 
 }
 
+let hashTable = new HashTable(2)
+
+hashTable.insert("key-1", "val-1");
+hashTable.insert("key-2", "val-2");
+hashTable.insert("key-3", "val-3");
+hashTable.insert("key-1", "val-100000");
 
 module.exports = HashTable;
